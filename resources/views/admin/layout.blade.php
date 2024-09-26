@@ -10,7 +10,7 @@
 	<meta name="keywords" content="Jassa, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link rel="shortcut icon" href="img/icons/icon-48x48.png">
+	<link rel="shortcut icon" href="{{asset('asset/backend/img/icons/icon-48x48.png')}}">
 
 	<link rel="canonical" href="index.htm">
 
