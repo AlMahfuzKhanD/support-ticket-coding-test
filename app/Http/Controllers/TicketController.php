@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use DB;
-use Carbon\Carbon;
 use Mail;
-use App\Mail\TicketOpenMail;
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Ticket;
+use App\Mail\TicketOpenMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,6 +30,7 @@ class TicketController extends Controller
        
         DB::beginTransaction();
         try {
+            
             $createTicket = Ticket::insert([
                 'subject' => $request->subject,
                 'description' => $request->description,
@@ -37,13 +39,14 @@ class TicketController extends Controller
             ]);
 
             if($createTicket){
+                $receiverEmail = User::where('role','admin')->first();
                 $mailData = [
                     'subject' => $request->subject,
                     'description' => $request->description,
                     'ticket_open_by' => Auth::user()->name
                 ];
                 
-                Mail::to('almahfuz380@gmail.com')->send(new TicketOpenMail($mailData));
+                Mail::to($receiverEmail)->send(new TicketOpenMail($mailData));
             }
             
 
