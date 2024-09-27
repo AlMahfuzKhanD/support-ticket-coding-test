@@ -14,7 +14,7 @@
 
 	<link rel="canonical" href="index.htm">
 
-	<title>Jassa - Bootstrap 5 Admin Template</title>
+	<title>Support Ticket System</title>
 
 	<link href="{{asset('asset/backend/css2.css?family=Inter:wght@300;400;600&display=swap')}}" rel="stylesheet">
 

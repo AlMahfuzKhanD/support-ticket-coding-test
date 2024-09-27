@@ -46,7 +46,8 @@
                     <i class="align-middle" data-feather="user"></i> <span class="align-middle">Tickets</span>
                 </a>
                 <ul id="dashboards" class="sidebar-dropdown list-unstyled collapse show" data-bs-parent="#sidebar">
-                    <li class="sidebar-item active"><a class="sidebar-link" href="index.html">Analytics</a></li>
+                    <li class="sidebar-item active"><a class="sidebar-link" href="{{ route('all.ticket')}}">All Ticket</a></li>
+                    <li class="sidebar-item active"><a class="sidebar-link" href="{{ route('create.ticket')}}">Create Ticket</a></li>
                 </ul>
             </li>
         </ul>
