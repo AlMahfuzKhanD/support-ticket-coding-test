@@ -9,7 +9,7 @@
             </div>
 
             <div class="col-auto ms-auto text-end mt-n1">
-                <a href="#" class="btn btn-primary">All Tickets</a>
+                <a href="{{ route('all.ticket') }}" class="btn btn-primary">All Tickets</a>
             </div>
         </div>
         <div class="row">

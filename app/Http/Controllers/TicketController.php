@@ -16,16 +16,27 @@ use Illuminate\Support\Facades\Auth;
 class TicketController extends Controller
 {
     public function index(){
+        $userInfo = Auth::user();
+        $ticketStatus = User::where('id',$userInfo->id)->first()->has_open_ticket;
         $tickets = [];
-        if(Auth::user()->role == 'admin'){
+        if($userInfo->role == 'admin'){
             $tickets = Ticket::all();
         }else{            
-            $tickets = Ticket::where('created_by',Auth::user()->id)->get();
+            $tickets = Ticket::where('created_by',$userInfo->id)->get();
         }
-        return view('admin.ticket.all_ticket',compact('tickets'));
+        return view('admin.ticket.all_ticket',compact('tickets','ticketStatus','userInfo'));
     }
     public function createTicket(){
-        return view('admin.ticket.create_ticket');
+        if(Auth::user()->role != 'admin'){
+            return view('admin.ticket.create_ticket');
+        }else{
+            $notification = array(
+                'message' => 'Only Customer Can Create Ticket!!',
+                'alert-type' => 'error'
+            );
+            return redirect()->back()->with($notification);
+        }
+        
     }
 
     public function store(Request $request){
@@ -46,7 +57,7 @@ class TicketController extends Controller
             ]);
 
             if($createTicket){
-                $userInfo = Auth::user()->first();
+                $userInfo = Auth::user();
                 User::where('id',$userInfo->id)->update([
                     'has_open_ticket' => '1'
                 ]);

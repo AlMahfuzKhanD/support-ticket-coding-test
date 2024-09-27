@@ -37,4 +37,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/create/ticket', [TicketController::class, 'createTicket'])->name('create.ticket');
     Route::post('/store/ticket', [TicketController::class, 'store'])->name('store.ticket');
     Route::get('/close/ticket/{id}', [TicketController::class, 'closeTicket'])->name('close.ticket');
+    Route::get('/view/ticket/{id}', [TicketController::class, 'viewTicket'])->name('view.ticket');
 });

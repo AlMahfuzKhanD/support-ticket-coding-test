@@ -7,10 +7,12 @@
             <div class="col-auto d-none d-sm-block">
                 <h3><strong>All</strong> Tickets</h3>
             </div>
-
+            @if ($ticketStatus == '0' && $userInfo->role != 'admin')
             <div class="col-auto ms-auto text-end mt-n1">
-                <a href="#" class="btn btn-primary">Create a New Ticket</a>
-            </div>
+                <a href="{{ route('create.ticket') }}" class="btn btn-primary">Create a New Ticket</a>
+            </div> 
+            @endif
+            
         </div>
         <div class="row">
             <div class="col-12">
@@ -37,8 +39,8 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="#" class="btn btn-pill btn-warning" title="details"> <i data-feather="eye"></i></a>
-                                        @if ($ticket->status == 'open')
+                                        <a href="{{ route('view.ticket',$ticket->id) }}" class="btn btn-pill btn-warning" title="details"> <i data-feather="eye"></i></a>
+                                        @if ($ticket->status == 'open' && Auth::user()->role == 'admin')
                                         <a href="{{ route('close.ticket',$ticket->id) }}" class="btn btn-pill btn-danger"> Close</a>
                                         @endif
                                         {{-- <a href="{{ route('delete.agent.property',$ticket) }}"  class="btn btn-inverse-danger" id="delete">Delete</a> --}}

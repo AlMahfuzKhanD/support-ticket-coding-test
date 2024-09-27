@@ -1,5 +1,6 @@
 @php
     $userInfo = Illuminate\Support\Facades\Auth::user();
+    $ticketStatus = App\Models\User::where('id',$userInfo->id)->first()->has_open_ticket; 
 @endphp
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
@@ -49,8 +50,11 @@
                     <i class="align-middle" data-feather="user"></i> <span class="align-middle">Tickets</span>
                 </a>
                 <ul id="dashboards" class="sidebar-dropdown list-unstyled collapse show" data-bs-parent="#sidebar">
-                    <li class="sidebar-item active"><a class="sidebar-link" href="{{ route('all.ticket')}}">All Ticket</a></li>
+                    <li class="sidebar-item active"><a class="sidebar-link" href="{{ route('all.ticket')}}">All Ticket</a></li>                    
+                    @if ($ticketStatus == '0' && $userInfo->role != 'admin')
                     <li class="sidebar-item active"><a class="sidebar-link" href="{{ route('create.ticket')}}">Create Ticket</a></li>
+                    @endif
+                    
                 </ul>
             </li>
         </ul>
