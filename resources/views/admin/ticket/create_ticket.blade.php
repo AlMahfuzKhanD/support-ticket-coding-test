@@ -21,7 +21,7 @@
                             @csrf
                             <div class="mb-3">
                                 <label class="form-label" for="subject">Ticket Subject</label>
-                                <input type="text" class="form-control" id="subject" placeholder="Add Ticket Subject" name="subject">
+                                <input type="text" class="form-control" id="subject" placeholder="Add Ticket Subject" name="subject" autocomplete="off">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Description</label>
