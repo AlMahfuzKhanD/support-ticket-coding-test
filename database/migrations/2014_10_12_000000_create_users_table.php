@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->enum('role',['admin','customer'])->default('customer');
             $table->enum('status',['active','inactive'])->default('active');
+            $table->enum('has_open_ticket',['0','1'])->default('0');
             $table->rememberToken();
             $table->timestamps();
         });

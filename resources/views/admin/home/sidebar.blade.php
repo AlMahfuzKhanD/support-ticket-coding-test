@@ -1,3 +1,6 @@
+@php
+    $userInfo = Illuminate\Support\Facades\Auth::user();
+@endphp
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
         <a class="sidebar-brand" href="index.html">
@@ -18,8 +21,8 @@
                     <img src="{{ asset('asset/backend/img/avatars/avatar.jpg')}}" class="avatar img-fluid rounded me-1" alt="Jassa">
                 </div>
                 <div class="flex-grow-1 ps-2">
-                    <a class="sidebar-user-title dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                        Al Mahfuz
+                    <a class="sidebar-user-title dropdown-toggle text-capitalize" href="#" data-bs-toggle="dropdown">
+                        {{ $userInfo->name??''}}
                     </a>
                     <div class="dropdown-menu dropdown-menu-start">
                         <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>                        
@@ -34,7 +37,7 @@
                         </form>
                     </div>
 
-                    <div class="sidebar-user-subtitle">Admin</div>
+                    <div class="sidebar-user-subtitle text-capitalize">{{ $userInfo->role??''}}</div>
                 </div>
             </div>
         </div>

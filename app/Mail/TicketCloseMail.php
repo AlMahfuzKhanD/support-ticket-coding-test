@@ -9,12 +9,11 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class TicketOpenMail extends Mailable
+class TicketCloseMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $mailData;
-
     /**
      * Create a new message instance.
      */
@@ -29,7 +28,7 @@ class TicketOpenMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'A new support request',
+            subject: 'Your Ticket Closed',
         );
     }
 
@@ -39,7 +38,7 @@ class TicketOpenMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.ticket_open_mail',
+            view: 'mail.ticket_close_mail',
         );
     }
 
