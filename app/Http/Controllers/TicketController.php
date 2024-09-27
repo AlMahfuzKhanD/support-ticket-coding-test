@@ -104,12 +104,10 @@ class TicketController extends Controller
             $ticket->update([
                 'status' => 'closed'
             ]);
-            $userInfo = User::where('id',$ticket->created_by)->first();
-            $userInfo->update([
+            User::where('id',$ticket->created_by)->update([
                 'has_open_ticket' => '0'
-            ]);
-            
-            $receiverEmail = $userInfo->email;
+            ]);            
+            $receiverEmail = User::where('id',$ticket->created_by)->first()->email;
             $mailData = [
                 'subject' => $ticket->subject,
                 'description' => $ticket->description,
