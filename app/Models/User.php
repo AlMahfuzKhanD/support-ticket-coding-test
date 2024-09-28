@@ -46,6 +46,6 @@ class User extends Authenticatable
 
     public function tickets()
     {
-        return $this->hasMany(Ticket::class,'created_by')->latest();
+        return $this->hasMany(Ticket::class)->latest();
     }
 }

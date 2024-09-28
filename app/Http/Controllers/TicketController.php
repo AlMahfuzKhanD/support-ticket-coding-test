@@ -22,7 +22,7 @@ class TicketController extends Controller
         if($userInfo->role == 'admin'){
             $tickets = Ticket::all();
         }else{            
-            $tickets = Ticket::where('created_by',$userInfo->id)->get();
+            $tickets = Ticket::where('user_id',$userInfo->id)->get();
         }
         return view('admin.ticket.all_ticket',compact('tickets','ticketStatus','userInfo'));
     }
@@ -52,7 +52,7 @@ class TicketController extends Controller
             $createTicket = Ticket::insert([
                 'subject' => $request->subject,
                 'description' => $request->description,
-                'created_by'  => Auth::user()->id,
+                'user_id'  => Auth::user()->id,
                 'created_at' =>  Carbon::now(),
             ]);
 
@@ -104,10 +104,10 @@ class TicketController extends Controller
             $ticket->update([
                 'status' => 'closed'
             ]);
-            User::where('id',$ticket->created_by)->update([
+            User::where('id',$ticket->user_id)->update([
                 'has_open_ticket' => '0'
             ]);            
-            $receiverEmail = User::where('id',$ticket->created_by)->first()->email;
+            $receiverEmail = User::where('id',$ticket->user_id)->first()->email;
             $mailData = [
                 'subject' => $ticket->subject,
                 'description' => $ticket->description,
@@ -135,5 +135,11 @@ class TicketController extends Controller
             );
             return redirect()->back()->with($notification);
         }
+    }
+
+    public function viewTicket($id){
+        $ticketInfo = Ticket::with('comments')->where('id',$id)->first();
+        // dd($ticketInfo);
+        return view('admin.ticket.view_ticket',compact('ticketInfo'));
     }
 }
