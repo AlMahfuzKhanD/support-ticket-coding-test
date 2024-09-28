@@ -61,8 +61,8 @@
                                 <img src="{{asset('asset/backend/img/avatars/avatar-2.jpg')}}" width="36" height="36" class="rounded-circle me-2" alt="img">
                                 <div class="flex-grow-1">
                                     {{-- <small class="float-end text-navy">30m ago</small> --}}
-                                    <strong>{{ $response->user->name }}</strong> response to this ticket<br>
-                                    <small class="text-muted">Today 7:21 pm</small>
+                                    <strong>{{ $response->user->name }}'s</strong> response<br>
+                                    {{-- <small class="text-muted">Today 7:21 pm</small> --}}
 
                                     <div class="border text-sm text-muted p-2 mt-1">
                                         {{ $response->comment??'' }}
